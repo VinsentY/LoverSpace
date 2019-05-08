@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ImageView img_head;
     //TODO img_love类型 是SurfaceView吗？
-    private TextView tv_love_val;
     private Button btn_left_list;
+    private TextView tv_love_val;
     private Button btn_right_moment;
 
     @Override
