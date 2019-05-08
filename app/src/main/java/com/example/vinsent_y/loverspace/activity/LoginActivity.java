@@ -16,9 +16,9 @@ import com.example.vinsent_y.loverspace.R;
 
 
 public class LoginActivity extends AppCompatActivity {
-    
-    private EditText edit_username;
+
     private EditText edit_password;
+    private EditText edit_username;
     private Button btn_submit;
     
     @Override
