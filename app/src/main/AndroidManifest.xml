@@ -23,10 +23,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.LoginActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,7 +39,9 @@
             android:authorities="com.example.vinsent_y.loverspace.BmobContentProvider" />
 
         <activity android:name=".activity.register.PhoneNumberActivity" />
-        <activity android:name=".activity.register.VerificationActivity" />
+        <activity 
+            android:theme="@style/HasActioBar"
+            android:name=".activity.register.VerificationActivity" />
         <activity android:name=".activity.register.UserInformationActivity"></activity>
     </application>
 

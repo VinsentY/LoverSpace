@@ -17,6 +17,7 @@ import com.example.vinsent_y.loverspace.entity.MyUser;
 import cn.bmob.v3.BmobSMS;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /**
@@ -49,19 +50,28 @@ public class VerificationActivity extends AppCompatActivity {
         phoneNumber = getIntent().getStringExtra("param1");
 
         initView();
+        //注册事件回调（根据实际需要，可写，可不写）
+        phoneCode.setOnInputListener(new PhoneCode.OnInputListener() {
+            @Override
+            public void onSuccess(String code) {
+                //TODO: 例如底部【下一步】按钮可点击
+            }
 
+            @Override
+            public void onInput() {
+                //TODO:例如底部【下一步】按钮不可点击
+            }
+        });
     }
 
     private void initView() {
-//        edit_code_part_1 = findViewById(R.id.edit_code_part_1);
-//        edit_code_part_2 = findViewById(R.id.edit_code_part_2);
-//        edit_code_part_3 = findViewById(R.id.edit_code_part_3);
-//        edit_code_part_4 = findViewById(R.id.edit_code_part_4);
+//        phoneCode = findViewById(R.id.phoneCode);
+
     }
 
     public boolean checkLegal(String verificationCode) {
         //TODO 检测验证码是否正确
-        String code = getCode();
+        String code = phoneCode.getPhoneCode();
         BmobSMS.verifySmsCode(phoneNumber, code, new UpdateListener() {
             @Override
             public void done(BmobException e) {
@@ -69,14 +79,16 @@ public class VerificationActivity extends AppCompatActivity {
                     Snackbar.make(btn_submit,"验证码验证成功，您可以在此时进行绑定操作！",BaseTransientBottomBar.LENGTH_LONG).show();
 
                     //TODO 之前还需要注册账户
-                    MyUser user = BmobUser.getCurrentUser(MyUser.class);
+                    MyUser user = new MyUser();
+                    user.setUsername(phoneNumber);
                     user.setMobilePhoneNumber(phoneNumber);
                     user.setMobilePhoneNumberVerified(true);
-                    user.update(new UpdateListener() {
+
+                    user.signUp(new SaveListener<MyUser>() {
                         @Override
-                        public void done(BmobException e) {
+                        public void done(MyUser myUser, BmobException e) {
                             if (e == null) {
-                                Snackbar.make(btn_submit,"绑定手机号码成功",BaseTransientBottomBar.LENGTH_LONG).show();
+                                Snackbar.make(btn_submit,"绑定手机号码成功", BaseTransientBottomBar.LENGTH_LONG).show();
                             } else {
                                 Snackbar.make(btn_submit,"绑定手机号码失败：" + e.getErrorCode() + "-" + e.getMessage(),BaseTransientBottomBar.LENGTH_LONG).show();
                             }
@@ -91,12 +103,4 @@ public class VerificationActivity extends AppCompatActivity {
         return false;
     }
 
-
-    /**
-     *
-     * TODO 得到验证码
-     */
-    private String getCode() {
-       return  null;
-    }
 }

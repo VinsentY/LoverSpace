@@ -30,7 +30,7 @@ public class PhoneNumberActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_phone_actvity);
+        setContentView(R.layout.activity_phone);
         initView();
     }
 

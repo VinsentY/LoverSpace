@@ -163,7 +163,7 @@ public class PhoneCode extends RelativeLayout {
             return;
         }
         if(codes.size()==4){
-            onInputListener.onSucess(getPhoneCode());
+            onInputListener.onSuccess(getPhoneCode());
         }else{
             onInputListener.onInput();
         }
@@ -171,7 +171,7 @@ public class PhoneCode extends RelativeLayout {
 
     //定义回调
     public interface OnInputListener{
-        void onSucess(String code);
+        void onSuccess(String code);
         void onInput();
     }
     private OnInputListener onInputListener;
