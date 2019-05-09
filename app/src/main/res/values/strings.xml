@@ -7,4 +7,12 @@
     <string name="verify_phone">手机号验证</string>
     <string name="register_phone">手机号注册</string>
     <string name="send_code_succeed">验证码已发送至</string>
+    <string name="get_code_again">重新获取</string>
+    <string name="user_info">用户信息</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="input_name">输入姓名</string>
+    <string name="input_address">输入地址</string>
+    <string name="input_birthday">输入生日</string>
+    <string name="submit">提交</string>
 </resources>

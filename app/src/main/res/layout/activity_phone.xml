@@ -21,7 +21,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/ic_return1"
+            android:background="@drawable/ic_return_black"
             android:contentDescription="@string/register_phone" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/register_phone"
-            android:textColor="#000000"
+            android:textColor="#000"
             android:textSize="24sp" />
     </LinearLayout>
     <EditText

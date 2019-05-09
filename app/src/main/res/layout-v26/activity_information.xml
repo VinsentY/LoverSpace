@@ -20,7 +20,6 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/ic_return_black"
             android:contentDescription="@string/user_info" />
@@ -29,7 +28,6 @@
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/user_info"
             android:textColor="#000000"
@@ -38,29 +36,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="314dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <EditText
             android:id="@+id/editText4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:ems="10"
             android:hint="@string/input_name"
-            android:inputType="textPersonName"
-            android:autofillHints="@string/input_name" />
+            android:importantForAutofill="no"
+            android:inputType="textPersonName" />
 
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
             <RadioButton
@@ -68,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="20sp"
                 android:text="@string/male" />
 
             <RadioButton
@@ -75,6 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="20sp"
                 android:text="@string/female" />
         </RadioGroup>
 
@@ -82,16 +85,31 @@
             android:id="@+id/editText5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp"
             android:ems="10"
             android:hint="@string/input_address"
+            android:importantForAutofill="no"
             android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editText6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp"
             android:ems="10"
-            android:hint="生日："
+            android:hint="@string/input_birthday"
+            android:importantForAutofill="no"
             android:inputType="textPersonName" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="64dp"
+            android:text="@string/submit"
+            android:textSize="24sp"
+            android:textColor="@color/colorAccent"
+            android:background="@drawable/button_circle_shape" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

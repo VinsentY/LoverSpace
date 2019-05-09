@@ -20,7 +20,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/ic_return1"
+            android:background="@drawable/ic_return_black"
             android:contentDescription="@string/verify_phone" />
 
         <TextView
@@ -40,38 +40,50 @@
         android:layout_height="64dp"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="64dp"
+        android:weightSum="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout">
 
-        <LinearLayout
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_height="0dp"
+            android:layout_weight="2"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:weightSum="2">
+            android:textColor="#000"
+            android:text="@string/send_code_succeed"
+            android:textSize="20sp"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:orientation="horizontal"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/send_code_succeed"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:text="+86 123456789"/>
+            <Space
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
-        </LinearLayout>
+                android:layout_weight="1"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/get_code_again"
+                android:gravity="center"
+                android:background="#0000"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp" />
+        </LinearLayout>
     </LinearLayout>
 
     <com.example.vinsent_y.loverspace.view.PhoneCode
