@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">LoverSpace</string>
+    <string name="return_login">返回登录界面</string>
+    <string name="input_phone">+86 请输入电话号码</string>
+    <string name="input_password">设置登录密码，不少于6位</string>
+    <string name="next_step">下一步</string>
+    <string name="verify_phone">手机号验证</string>
+    <string name="register_phone">手机号注册</string>
+    <string name="send_code_succeed">验证码已发送至</string>
 </resources>
