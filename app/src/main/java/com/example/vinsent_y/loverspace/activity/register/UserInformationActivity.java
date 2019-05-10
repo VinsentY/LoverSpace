@@ -48,6 +48,7 @@ public class UserInformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
 
+        initView();
         radioGroup_gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -58,6 +59,12 @@ public class UserInformationActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void initView() {
+        edit_real_name = findViewById(R.id.edit_real_name);
+        radioGroup_gender = findViewById(R.id.radioGroup_gender);
+        btn_submit = findViewById(R.id.btn_submit);
     }
 
     public void check() {
@@ -72,10 +79,10 @@ public class UserInformationActivity extends AppCompatActivity {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
-                    Snackbar.make(btn_submit,"绑定手机号码成功", BaseTransientBottomBar.LENGTH_LONG).show();
+                    Snackbar.make(btn_submit,"注册成功", BaseTransientBottomBar.LENGTH_LONG).show();
                     startActivity(new Intent(UserInformationActivity.this, MainActivity.class));
                 } else {
-                    Snackbar.make(btn_submit,"绑定手机号码成功", BaseTransientBottomBar.LENGTH_LONG).show();
+                    Snackbar.make(btn_submit,"注册失败", BaseTransientBottomBar.LENGTH_LONG).show();
                 }
             }
         });

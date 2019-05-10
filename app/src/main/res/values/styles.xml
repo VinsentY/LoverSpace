@@ -14,4 +14,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="VerifyBox">
+        <item name="android:textColor"> #2D2D2D </item>
+        <item name="android:background">@null </item>
+        <item name="android:textSize"> 40sp</item>
+        <item name="android:gravity">center </item>
+    </style>
+
 </resources>

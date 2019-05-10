@@ -5,8 +5,10 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.example.vinsent_y.loverspace.R;
 
@@ -24,32 +26,50 @@ import cn.bmob.v3.listener.QueryListener;
 
 public class PhoneNumberActivity extends AppCompatActivity {
 
+    private ImageButton btn_back;
+
     private EditText edit_phone;
     private Button btn_submit;
+    private EditText edit_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone);
         initView();
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendSMS();
+            }
+        });
+
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initView() {
-//        edit_phone = findViewById(R.id.edit_phone);
-//        btn_submit = findViewById(R.id.btn_submit);
+        btn_back = findViewById(R.id.btn_back);
+        edit_phone = findViewById(R.id.edit_phone);
+        btn_submit = findViewById(R.id.btn_submit);
+        edit_password = findViewById(R.id.edit_password);
     }
 
     public void sendSMS() {
-        //TODO 发送验证码给手机
         final String phoneNumber = edit_phone.getText().toString().trim();
+        final String password = edit_password.getText().toString().trim();
 
         if (!TextUtils.isEmpty(phoneNumber)) {
-            BmobSMS.requestSMSCode(phoneNumber, "DataSDK", new QueryListener<Integer>() {
+            BmobSMS.requestSMSCode(phoneNumber, "", new QueryListener<Integer>() {
                 @Override
                 public void done(Integer smsId, BmobException e) {
                     if (e == null) {
                         Snackbar.make(btn_submit,"发送验证码成功，短信ID：" + smsId,BaseTransientBottomBar.LENGTH_LONG).show();
-                        VerificationActivity.actionStart(PhoneNumberActivity.this, phoneNumber);
+                        VerificationActivity.actionStart(PhoneNumberActivity.this, phoneNumber, password);
                     } else {
                         Snackbar.make(btn_submit,"发送验证码失败：" + e.getErrorCode() + "-" + e.getMessage(),BaseTransientBottomBar.LENGTH_LONG).show();
                     }

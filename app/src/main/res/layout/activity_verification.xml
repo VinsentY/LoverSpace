@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
+            android:id="@+id/btn_back"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginStart="8dp"
@@ -75,6 +76,7 @@
                 android:layout_weight="1"/>
 
             <Button
+                android:id="@+id/btn_resend"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/get_code_again"
@@ -87,7 +89,7 @@
     </LinearLayout>
 
     <com.example.vinsent_y.loverspace.view.PhoneCode
-        android:id="@+id/view_verify_code"
+        android:id="@+id/phoneCode"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_marginTop="8dp"
