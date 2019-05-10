@@ -61,8 +61,6 @@ public class ShowButton extends AppCompatButton {
         backDrawable.setCornerRadius(120);
         setBackground(backDrawable);
 
-        setText("登陆");
-
         paint=new Paint();
         paint.setColor(getResources().getColor(android.R.color.white));
         paint.setStrokeWidth(4);

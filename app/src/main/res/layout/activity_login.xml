@@ -18,7 +18,7 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Name"
+        android:hint="@string/input_name"
         app:layout_constraintBottom_toTopOf="@+id/edit_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -36,15 +36,15 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="37dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Name"
+        android:inputType="numberPassword"
+        android:hint="@string/input_password"
         app:layout_constraintBottom_toTopOf="@+id/btn_submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_username" />
 
-    <Button
+    <com.example.vinsent_y.loverspace.view.ShowButton
         android:id="@+id/btn_submit"
         android:layout_width="216dp"
         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="92dp"
-        android:text="Button"
+        android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
