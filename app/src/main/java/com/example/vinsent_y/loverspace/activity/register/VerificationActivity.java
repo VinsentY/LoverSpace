@@ -3,6 +3,7 @@ package com.example.vinsent_y.loverspace.activity.register;
 import android.content.Context;
 import android.content.Intent;
 
+import com.example.vinsent_y.loverspace.util.KeyboardHelper;
 import com.example.vinsent_y.loverspace.view.PhoneCode;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.vinsent_y.loverspace.R;
@@ -40,6 +42,8 @@ public class VerificationActivity extends AppCompatActivity {
 
     private String phoneNumber;
     private String password;
+    private EditText edit_input;
+    private KeyboardHelper helper =  KeyboardHelper.getInstance();
 
     public static void actionStart(Context context, String phoneNumber, String password) {
         Intent intent = new Intent(context, VerificationActivity.class);
@@ -53,17 +57,18 @@ public class VerificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification);
 
-        //TODO 小键盘没有自动弹出，并且验证码为6位
         Intent intent = getIntent();
         phoneNumber = intent.getStringExtra("param1");
         password = intent.getStringExtra("param2");
 
         initView();
+        helper.openKeyBoard(edit_input);
         //注册事件回调（根据实际需要，可写，可不写）
         phoneCode.setOnInputListener(new PhoneCode.OnInputListener() {
             @Override
             public void onSuccess(String code) {
-               checkLegal(code);
+                helper.hideKeyBoard(edit_input);
+                checkLegal(code);
             }
 
             @Override
@@ -93,7 +98,6 @@ public class VerificationActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //TODO 验证码倒计时 颜色变化
                 int time = 60;
                 while (time != 0) {
                     final int finalTime = time;
@@ -119,6 +123,7 @@ public class VerificationActivity extends AppCompatActivity {
         phoneCode = findViewById(R.id.phoneCode);
         btn_submit = findViewById(R.id.btn_submit);
         btn_resend = findViewById(R.id.btn_resend);
+        edit_input = phoneCode.findViewById(R.id.edit_input);
     }
 
     public void checkLegal(String verificationCode) {
