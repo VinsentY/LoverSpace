@@ -1,4 +1,4 @@
-package com.example.vinsent_y.loverspace.application;
+package com.example.vinsent_y.loverspace.base;
 
 import android.app.Application;
 

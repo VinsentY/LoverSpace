@@ -39,16 +39,21 @@ public class ShowButton extends AppCompatButton {
 
     private ValueAnimator arcValueAnimator;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public ShowButton(Context context) {
         super(context);
+        init(context);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public ShowButton(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(context);
     }
 
     public ShowButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(context);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
