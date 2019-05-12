@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import com.example.vinsent_y.loverspace.R;
 import com.example.vinsent_y.loverspace.entity.MyUser;
@@ -37,8 +37,8 @@ import cn.bmob.v3.listener.UpdateListener;
 public class VerificationActivity extends AppCompatActivity {
 
     private PhoneCode phoneCode;
-    private Button btn_submit;
     private Button btn_resend;
+    private ImageButton btn_back;
 
     private String phoneNumber;
     private String password;
@@ -76,6 +76,13 @@ public class VerificationActivity extends AppCompatActivity {
             }
         });
 
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         btn_resend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,9 +91,9 @@ public class VerificationActivity extends AppCompatActivity {
                     @Override
                     public void done(Integer smsId, BmobException e) {
                         if (e == null) {
-                            Snackbar.make(btn_submit,"发送验证码成功，短信ID：" + smsId,BaseTransientBottomBar.LENGTH_LONG).show();
+                            Snackbar.make(btn_resend,"发送验证码成功，短信ID：" + smsId,BaseTransientBottomBar.LENGTH_LONG).show();
                         } else {
-                            Snackbar.make(btn_submit,"发送验证码失败：" + e.getErrorCode() + "-" + e.getMessage(),BaseTransientBottomBar.LENGTH_LONG).show();
+                            Snackbar.make(btn_resend,"发送验证码失败：" + e.getErrorCode() + "-" + e.getMessage(),BaseTransientBottomBar.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -121,9 +128,9 @@ public class VerificationActivity extends AppCompatActivity {
 
     private void initView() {
         phoneCode = findViewById(R.id.phoneCode);
-        btn_submit = findViewById(R.id.btn_submit);
         btn_resend = findViewById(R.id.btn_resend);
         edit_input = phoneCode.findViewById(R.id.edit_input);
+        btn_back = findViewById(R.id.btn_back);
     }
 
     public void checkLegal(String verificationCode) {
@@ -132,7 +139,7 @@ public class VerificationActivity extends AppCompatActivity {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
-                    Snackbar.make(btn_submit,"验证码验证成功，您可以在此时进行绑定操作！",BaseTransientBottomBar.LENGTH_LONG).show();
+                    Snackbar.make(btn_resend,"验证码验证成功，您可以在此时进行绑定操作！",BaseTransientBottomBar.LENGTH_LONG).show();
 
                     MyUser user = new MyUser();
                     user.setUsername(phoneNumber);
@@ -144,15 +151,15 @@ public class VerificationActivity extends AppCompatActivity {
                         @Override
                         public void done(MyUser myUser, BmobException e) {
                             if (e == null) {
-                                Snackbar.make(btn_submit,"绑定手机号码成功", BaseTransientBottomBar.LENGTH_LONG).show();
+                                Snackbar.make(btn_resend,"绑定手机号码成功", BaseTransientBottomBar.LENGTH_LONG).show();
                                 startActivity(new Intent(VerificationActivity.this, UserInformationActivity.class));
                             } else {
-                                Snackbar.make(btn_submit,"绑定手机号码失败：" + e.getErrorCode() + "-" + e.getMessage(),BaseTransientBottomBar.LENGTH_LONG).show();
+                                Snackbar.make(btn_resend,"绑定手机号码失败：" + e.getErrorCode() + "-" + e.getMessage(),BaseTransientBottomBar.LENGTH_LONG).show();
                             }
                         }
                     });
                 } else {
-                    Snackbar.make(btn_submit,"验证码验证失败：" + e.getErrorCode() + "-" + e.getMessage(),BaseTransientBottomBar.LENGTH_LONG).show();
+                    Snackbar.make(btn_resend,"验证码验证失败：" + e.getErrorCode() + "-" + e.getMessage(),BaseTransientBottomBar.LENGTH_LONG).show();
                 }
             }
         });

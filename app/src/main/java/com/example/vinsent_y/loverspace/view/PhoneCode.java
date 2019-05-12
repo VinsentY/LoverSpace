@@ -42,7 +42,7 @@ public class PhoneCode extends RelativeLayout {
     private View v4;
     private View v5;
     private View v6;
-    private EditText edit_code;
+    private EditText edit_input;
     private List<String> codes = new ArrayList<>();
     private List<TextView> textViews = new ArrayList<>();
     private List<View> views = new ArrayList<>();
@@ -82,7 +82,7 @@ public class PhoneCode extends RelativeLayout {
         textViews.add(tv_code6);
 
 
-        edit_code = view.findViewById(R.id.et_code);
+        edit_input = view.findViewById(R.id.edit_input);
         v1 = view.findViewById(R.id.v1);
         v2 = view.findViewById(R.id.v2);
         v3 = view.findViewById(R.id.v3);
@@ -99,7 +99,7 @@ public class PhoneCode extends RelativeLayout {
 
     private void initEvent() {
         //验证码输入
-        edit_code.addTextChangedListener(new TextWatcher() {
+        edit_input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -112,7 +112,7 @@ public class PhoneCode extends RelativeLayout {
             public void afterTextChanged(Editable editable) {
                 if (editable != null && editable.length() > 0) {
                     //TODO 可能出现Bug
-                    edit_code.setText("");
+                    edit_input.setText("");
                     if (codes.size() < NUM_OF_CODE) {
                         codes.add(editable.toString());
                         showCode();
@@ -121,7 +121,7 @@ public class PhoneCode extends RelativeLayout {
             }
         });
         // 监听验证码删除按键
-        edit_code.setOnKeyListener(new View.OnKeyListener() {
+        edit_input.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
                 if (keyCode == KeyEvent.KEYCODE_DEL && keyEvent.getAction() == KeyEvent.ACTION_DOWN && codes.size() > 0) {
@@ -199,11 +199,11 @@ public class PhoneCode extends RelativeLayout {
      */
     public void showSoftInput() {
         //显示软键盘
-        if (imm != null && edit_code != null) {
-            edit_code.postDelayed(new Runnable() {
+        if (imm != null && edit_input != null) {
+            edit_input.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    imm.showSoftInput(edit_code, 0);
+                    imm.showSoftInput(edit_input, 0);
                 }
             }, 200);
         }
