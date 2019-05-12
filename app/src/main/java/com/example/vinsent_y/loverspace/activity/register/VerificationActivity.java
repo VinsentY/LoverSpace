@@ -121,6 +121,12 @@ public class VerificationActivity extends AppCompatActivity {
                         e1.printStackTrace();
                     }
                 }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        btn_resend.setText("获取验证码");
+                    }
+                });
                 btn_resend.setClickable(true);
             }
         }).start();

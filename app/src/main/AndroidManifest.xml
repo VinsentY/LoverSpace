@@ -27,11 +27,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <provider
@@ -40,13 +36,20 @@
 
         <activity android:name=".activity.register.PhoneNumberActivity">
 
+
         </activity>
         <activity 
             android:theme="@style/HasActioBar"
             android:name=".activity.register.VerificationActivity">
 
         </activity>
-        <activity android:name=".activity.register.UserInformationActivity"></activity>
+        <activity android:name=".activity.register.UserInformationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

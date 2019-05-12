@@ -7,6 +7,7 @@ import cn.bmob.v3.listener.UpdateListener;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -17,6 +18,8 @@ import com.example.vinsent_y.loverspace.activity.MainActivity;
 import com.example.vinsent_y.loverspace.entity.MyUser;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Date;
 
 /**
 * FileName: UserInformationActivity
@@ -34,10 +37,13 @@ public class UserInformationActivity extends AppCompatActivity {
      * -calendar
      * -spinner_address
      */
+    //TODO RadioButton选中颜色有问题
 
     private EditText edit_real_name;
     private RadioGroup radioGroup_gender;
-    //TODO 生日和地址使用什么控件获取
+    private EditText spinner_address;
+    private EditText calendar;
+    //TODO 生日和地址使用什么控件获取（先暂时使用EditText
 
     private Button btn_submit;
 
@@ -65,26 +71,36 @@ public class UserInformationActivity extends AppCompatActivity {
         edit_real_name = findViewById(R.id.edit_real_name);
         radioGroup_gender = findViewById(R.id.radioGroup_gender);
         btn_submit = findViewById(R.id.btn_submit);
+        spinner_address = findViewById(R.id.spinner_address);
+        calendar = findViewById(R.id.calendar);
     }
 
     public void check() {
-        //TODO 检测信息合法性并提交
-        String real_name = edit_real_name.getText().toString();
 
-        MyUser user = BmobUser.getCurrentUser(MyUser.class);
-        user.setMale(isMale);
-        user.setReal_name(real_name);
-        //....
-        user.update(new UpdateListener() {
-            @Override
-            public void done(BmobException e) {
-                if (e == null) {
-                    Snackbar.make(btn_submit,"注册成功", BaseTransientBottomBar.LENGTH_LONG).show();
-                    startActivity(new Intent(UserInformationActivity.this, MainActivity.class));
-                } else {
-                    Snackbar.make(btn_submit,"注册失败", BaseTransientBottomBar.LENGTH_LONG).show();
+        String real_name = edit_real_name.getText().toString();
+        String address = spinner_address.getText().toString();
+        String date = calendar.getText().toString();
+
+        //TODO 检测信息是否需要依次监测
+        if (!TextUtils.isEmpty(real_name) && !TextUtils.isEmpty(address) && !TextUtils.isEmpty(date)) {
+            MyUser user = BmobUser.getCurrentUser(MyUser.class);
+            user.setMale(isMale);
+            user.setReal_name(real_name);
+            user.setAddress(address);
+            user.setBirthday(new Date());   //TODO 生日是Date类型
+            user.update(new UpdateListener() {
+                @Override
+                public void done(BmobException e) {
+                    if (e == null) {
+                        Snackbar.make(btn_submit,"注册成功", BaseTransientBottomBar.LENGTH_LONG).show();
+                        startActivity(new Intent(UserInformationActivity.this, MainActivity.class));
+                    } else {
+                        Snackbar.make(btn_submit,"注册失败", BaseTransientBottomBar.LENGTH_LONG).show();
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            Snackbar.make(btn_submit,"信息不能为空", BaseTransientBottomBar.LENGTH_LONG).show();
+        }
     }
 }
