@@ -38,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        BmobUser.logOut(); //清空应用缓存
+
         //获取缓存的用户信息，缓存的有效期为1年。
         if (BmobUser.isLogin()) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
@@ -57,9 +59,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initView() {
         //TODO 界面编写
-//        edit_username = findViewById(R.id.edit_password);
-//        edit_password = findViewById(R.id.edit_password);
-//        btn_submit = findViewById(R.id.btn_submit);
+        edit_username = findViewById(R.id.edit_username);
+        edit_password = findViewById(R.id.edit_password);
+        btn_submit = findViewById(R.id.btn_submit);
     }
 
     /**

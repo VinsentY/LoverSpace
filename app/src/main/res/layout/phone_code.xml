@@ -118,7 +118,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/et_code"
+        android:id="@+id/edit_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/ll_code"
