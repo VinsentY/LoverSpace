@@ -10,9 +10,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.view.View;
 import android.view.animation.LinearInterpolator;
-import android.widget.Button;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatButton;
@@ -51,6 +49,7 @@ public class ShowButton extends AppCompatButton {
         init(context);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public ShowButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);

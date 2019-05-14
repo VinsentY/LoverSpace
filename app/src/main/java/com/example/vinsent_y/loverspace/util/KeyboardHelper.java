@@ -3,8 +3,7 @@ package com.example.vinsent_y.loverspace.util;
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-
-import com.example.vinsent_y.loverspace.application.BaseApplication;
+import com.example.vinsent_y.loverspace.base.BaseApplication;
 
 import java.util.Timer;
 import java.util.TimerTask;

@@ -11,7 +11,6 @@ import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.example.vinsent_y.loverspace.R;
 import com.example.vinsent_y.loverspace.activity.MainActivity;
