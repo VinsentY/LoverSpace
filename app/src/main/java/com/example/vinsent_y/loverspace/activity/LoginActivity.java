@@ -68,9 +68,10 @@ public class LoginActivity extends AppCompatActivity {
 
         handler = new Handler();
         btn_submit.setOnClickListener(v -> {
-//                check();
-            btn_submit.startAnim();
-            handler.postDelayed(this::gotoNew,3000);
+                check();
+            //TODO 动画关闭
+//            btn_submit.startAnim();
+//            handler.postDelayed(this::gotoNew,0);
         });
 
     }
@@ -151,10 +152,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        edit_password.setVisibility(View.INVISIBLE);
-        edit_username.setVisibility(View.INVISIBLE);
-        animator.cancel();
-        rl_content.getBackground().setAlpha(0);
-        btn_submit.regainBackground();
+//        edit_password.setVisibility(View.INVISIBLE);
+//        edit_username.setVisibility(View.INVISIBLE);
+//        animator.cancel();
+//        rl_content.getBackground().setAlpha(0);
+//        btn_submit.regainBackground();
     }
 }

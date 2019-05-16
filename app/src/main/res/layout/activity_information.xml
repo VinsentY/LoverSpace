@@ -94,10 +94,11 @@
             android:importantForAutofill="no"
             android:inputType="textPersonName" />
 
-        <EditText
+        <TextView
             android:id="@+id/calendar"
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="16dp"
             android:textSize="20sp"
             android:ems="10"

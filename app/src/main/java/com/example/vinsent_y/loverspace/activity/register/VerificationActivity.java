@@ -91,9 +91,9 @@ public class VerificationActivity extends AppCompatActivity {
                     @Override
                     public void done(Integer smsId, BmobException e) {
                         if (e == null) {
-                            Snackbar.make(btn_resend,"发送验证码成功，短信ID：" + smsId,BaseTransientBottomBar.LENGTH_LONG).show();
+                            Snackbar.make(btn_resend,"发送验证码成功，短信ID：" + smsId,Snackbar.LENGTH_LONG).show();
                         } else {
-                            Snackbar.make(btn_resend,"发送验证码失败：" + e.getErrorCode() + "-" + e.getMessage(),BaseTransientBottomBar.LENGTH_LONG).show();
+                            Snackbar.make(btn_resend,"发送验证码失败：" + e.getErrorCode() + "-" + e.getMessage(),Snackbar.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -145,7 +145,7 @@ public class VerificationActivity extends AppCompatActivity {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
-                    Snackbar.make(btn_resend,"验证码验证成功，您可以在此时进行绑定操作！",BaseTransientBottomBar.LENGTH_LONG).show();
+                    Snackbar.make(btn_resend,"绑定手机号码成功",Snackbar.LENGTH_LONG).show();
 
                     MyUser user = new MyUser();
                     user.setUsername(phoneNumber);
@@ -153,19 +153,9 @@ public class VerificationActivity extends AppCompatActivity {
                     user.setMobilePhoneNumberVerified(true);
                     user.setPassword(password);
 
-                    user.signUp(new SaveListener<MyUser>() {
-                        @Override
-                        public void done(MyUser myUser, BmobException e) {
-                            if (e == null) {
-                                Snackbar.make(btn_resend,"绑定手机号码成功", BaseTransientBottomBar.LENGTH_LONG).show();
-                                startActivity(new Intent(VerificationActivity.this, UserInformationActivity.class));
-                            } else {
-                                Snackbar.make(btn_resend,"绑定手机号码失败：" + e.getErrorCode() + "-" + e.getMessage(),BaseTransientBottomBar.LENGTH_LONG).show();
-                            }
-                        }
-                    });
+                    UserInformationActivity.actionStart(VerificationActivity.this, user);
                 } else {
-                    Snackbar.make(btn_resend,"验证码验证失败：" + e.getErrorCode() + "-" + e.getMessage(),BaseTransientBottomBar.LENGTH_LONG).show();
+                    Snackbar.make(btn_resend,"验证码验证失败：" + e.getErrorCode() + "-" + e.getMessage(),Snackbar.LENGTH_LONG).show();
                 }
             }
         });

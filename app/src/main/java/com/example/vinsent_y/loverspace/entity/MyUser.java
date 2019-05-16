@@ -1,10 +1,11 @@
 package com.example.vinsent_y.loverspace.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import cn.bmob.v3.BmobUser;
 
-public class MyUser extends BmobUser {
+public class MyUser extends BmobUser implements Serializable {
     private String real_name;
     private boolean isMale;
     private int age;
