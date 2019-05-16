@@ -1,14 +1,30 @@
 package com.example.vinsent_y.loverspace.activity;
 
+import android.animation.Animator;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.example.vinsent_y.loverspace.view.NbButton;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.vinsent_y.loverspace.R;
@@ -30,9 +46,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText edit_username;
     private EditText edit_password;
-    private Button btn_submit;
+    private RelativeLayout rl_content;
+    private NbButton btn_submit;
+    private Handler handler;
+    private Animator animator;
 
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,17 +65,19 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         initView();
-//        btn_submit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
+
+        handler = new Handler();
+        btn_submit.setOnClickListener(v -> {
 //                check();
-//            }
-//        });
+            btn_submit.startAnim();
+            handler.postDelayed(this::gotoNew,3000);
+        });
 
     }
 
     private void initView() {
         //TODO 界面编写
+        rl_content = findViewById(R.id.rl_content);
         edit_username = findViewById(R.id.edit_username);
         edit_password = findViewById(R.id.edit_password);
         btn_submit = findViewById(R.id.btn_submit);
@@ -78,10 +98,10 @@ public class LoginActivity extends AppCompatActivity {
                     if (e == null) {
 //                        User user = BmobUser.getCurrentUser(User.class); 获取当前用户实例的方法
                         //TODO Snackbar 参数view
-                        Snackbar.make(LoginActivity.this.btn_submit, "登录成功：" + user.getUsername(), BaseTransientBottomBar.LENGTH_LONG).show();
+                        Snackbar.make(LoginActivity.this.btn_submit, "登录成功：" + user.getUsername(), Snackbar.LENGTH_LONG).show();
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     } else {
-                        Snackbar.make(LoginActivity.this.btn_submit, "登录失败：" + e.getMessage(), BaseTransientBottomBar.LENGTH_LONG).show();
+                        Snackbar.make(LoginActivity.this.btn_submit, "登录失败：" + e.getMessage(), Snackbar.LENGTH_LONG).show();
                     }
                 }
             });
@@ -89,5 +109,52 @@ public class LoginActivity extends AppCompatActivity {
             //TODO 关于字符串资源问题
             Toast.makeText(this, "用户名或密码不能为空！", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void gotoNew() {
+        btn_submit.gotoNew();
+
+        final Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+
+        int xc=(btn_submit.getLeft()+btn_submit.getRight())/2;
+        int yc=(btn_submit.getTop()+btn_submit.getBottom())/2;
+        animator= ViewAnimationUtils.createCircularReveal(rl_content,xc,yc,0,1111);
+        animator.setDuration(300);
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                handler.postDelayed(() -> {
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.anim_in,R.anim.anim_out);
+                },200);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        animator.start();
+        rl_content.getBackground().setAlpha(255);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        edit_password.setVisibility(View.INVISIBLE);
+        edit_username.setVisibility(View.INVISIBLE);
+        animator.cancel();
+        rl_content.getBackground().setAlpha(0);
+        btn_submit.regainBackground();
     }
 }
