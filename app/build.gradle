@@ -51,4 +51,7 @@ dependencies {
     implementation 'com.contrarywind:Android-PickerView:3.2.6'
 
 
+
+    //ButtonView
+    implementation 'com.github.StevenDXC:DxLoadingButton:2.2'
 }
