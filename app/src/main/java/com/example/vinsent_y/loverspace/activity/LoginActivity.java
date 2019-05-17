@@ -78,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initView() {
         //TODO 界面编写
-        rl_content = findViewById(R.id.rl_content);
         edit_username = findViewById(R.id.edit_username);
         edit_password = findViewById(R.id.edit_password);
         btn_submit = findViewById(R.id.btn_submit);

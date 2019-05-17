@@ -7,18 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".activity.LoginActivity">
 
-    <Button
-        android:id="@+id/btn_submit"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp"
-        android:text="@string/login"
-        android:textColor="#fff"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        tools:layout_editor_absoluteX="95dp" />
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
@@ -52,6 +40,21 @@
             tools:layout_editor_absoluteX="99dp"
             tools:layout_editor_absoluteY="452dp" />
     </LinearLayout>
+
+    <com.dx.dxloadingbutton.lib.LoadingButton
+        android:id="@+id/btn_submit"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/login"
+        android:textColor="#fff"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:lb_resetAfterFailed="true"
+        app:lb_btnColor="@color/colorPrimary"
+        app:lb_cornerRadius="32"
+        tools:layout_editor_absoluteX="95dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

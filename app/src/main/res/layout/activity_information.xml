@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:ems="10"
-            android:hint="@string/input_name"
+            android:hint="@string/input_username"
             android:importantForAutofill="no"
             android:inputType="textPersonName" />
 
