@@ -1,34 +1,22 @@
 package com.example.vinsent_y.loverspace.activity;
 
 import android.animation.Animator;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-
-import com.airbnb.lottie.LottieAnimationView;
-import com.example.vinsent_y.loverspace.view.NbButton;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.dx.dxloadingbutton.lib.LoadingButton;
 import com.example.vinsent_y.loverspace.R;
 import com.example.vinsent_y.loverspace.entity.MyUser;
+import com.example.vinsent_y.loverspace.view.NbButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -47,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edit_username;
     private EditText edit_password;
     private RelativeLayout rl_content;
-    private NbButton btn_submit;
+    private LoadingButton btn_submit;
     private Handler handler;
     private Animator animator;
 
@@ -109,52 +97,5 @@ public class LoginActivity extends AppCompatActivity {
             //TODO 关于字符串资源问题
             Toast.makeText(this, "用户名或密码不能为空！", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void gotoNew() {
-        btn_submit.gotoNew();
-
-        final Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-
-        int xc=(btn_submit.getLeft()+btn_submit.getRight())/2;
-        int yc=(btn_submit.getTop()+btn_submit.getBottom())/2;
-        animator= ViewAnimationUtils.createCircularReveal(rl_content,xc,yc,0,1111);
-        animator.setDuration(300);
-        animator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                handler.postDelayed(() -> {
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.anim_in,R.anim.anim_out);
-                },200);
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-        animator.start();
-        rl_content.getBackground().setAlpha(255);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-//        edit_password.setVisibility(View.INVISIBLE);
-//        edit_username.setVisibility(View.INVISIBLE);
-//        animator.cancel();
-//        rl_content.getBackground().setAlpha(0);
-//        btn_submit.regainBackground();
     }
 }
