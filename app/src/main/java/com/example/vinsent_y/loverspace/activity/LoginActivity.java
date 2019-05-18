@@ -1,6 +1,7 @@
 package com.example.vinsent_y.loverspace.activity;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dx.dxloadingbutton.lib.LoadingButton;
 import com.example.vinsent_y.loverspace.R;
 import com.example.vinsent_y.loverspace.entity.MyUser;
+import com.example.vinsent_y.loverspace.util.L;
 import com.example.vinsent_y.loverspace.util.ShareUtils;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -126,19 +128,19 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Animator animator = ViewAnimationUtils.createCircularReveal(animate_view,cx,cy,0f,getResources().getDisplayMetrics().heightPixels * 1.2f);
-        animator.setStartDelay(1000);
+        animator.setStartDelay(1500);
         animator.setDuration(500);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
-        animate_view.setVisibility(View.VISIBLE);
-        animator.start();
-        animator.addListener(new Animator.AnimatorListener(){
+        animator.addListener(new AnimatorListenerAdapter(){
 
             @Override
             public void onAnimationStart(Animator animation) {
+                animate_view.setVisibility(View.VISIBLE);
                 btn_submit.postDelayed(() -> {
                     btn_submit.reset();
                     animate_view.setVisibility(View.INVISIBLE);
-                },200);
+                },1000);
+                L.e("Fuck You!");
             }
 
             @Override
@@ -146,17 +148,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 overridePendingTransition(R.anim.anim_in,R.anim.anim_out);
             }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
         });
+        animator.start();
         return null;
     }
 }
