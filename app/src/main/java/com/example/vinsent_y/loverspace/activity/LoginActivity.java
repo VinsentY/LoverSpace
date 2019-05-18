@@ -126,19 +126,19 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Animator animator = ViewAnimationUtils.createCircularReveal(animate_view,cx,cy,0f,getResources().getDisplayMetrics().heightPixels * 1.2f);
-        animator.setStartDelay(1000);
+        animator.setStartDelay(1500);
         animator.setDuration(500);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
-        animate_view.setVisibility(View.VISIBLE);
         animator.start();
         animator.addListener(new Animator.AnimatorListener(){
 
             @Override
             public void onAnimationStart(Animator animation) {
+                animate_view.setVisibility(View.VISIBLE);
                 btn_submit.postDelayed(() -> {
                     btn_submit.reset();
                     animate_view.setVisibility(View.INVISIBLE);
-                },200);
+                },1500);
             }
 
             @Override

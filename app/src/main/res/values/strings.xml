@@ -16,5 +16,9 @@
     <string name="input_birthday">输入生日</string>
     <string name="submit">提交</string>
     <string name="login">登录</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="register">注册</string>
 
 </resources>
