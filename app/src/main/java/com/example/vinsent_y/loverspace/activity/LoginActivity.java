@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -16,7 +18,6 @@ import com.dx.dxloadingbutton.lib.LoadingButton;
 import com.example.vinsent_y.loverspace.R;
 import com.example.vinsent_y.loverspace.entity.MyUser;
 import com.example.vinsent_y.loverspace.util.ShareUtils;
-import com.example.vinsent_y.loverspace.view.NbButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import cn.bmob.v3.BmobUser;
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private LoadingButton btn_submit;
     private Handler handler;
     private Animator animator;
+    private View animate_view;
 
     private String username;
     private String password;
@@ -59,14 +61,10 @@ public class LoginActivity extends AppCompatActivity {
         initData();
         initView();
 
-        handler = new Handler();
         btn_submit.setOnClickListener(v -> {
-                check();
-            //TODO 动画关闭
-//            btn_submit.startAnim();
-//            handler.postDelayed(this::gotoNew,0);
+            btn_submit.startLoading();
+            check();
         });
-
     }
 
     private void initData() {
@@ -81,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
         edit_username.setText(username);
         edit_password.setText(password);
+        animate_view = findViewById(R.id.animate_view);
     }
 
     /**
@@ -95,19 +94,69 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void done(MyUser user, BmobException e) {
                     if (e == null) {
+//                        User user = BmobUser.getCurrentUser(User.class); 获取当前用户实例的方法
+                        btn_submit.loadingSuccessful();
+                        btn_submit.setAnimationEndAction(toNextPage());
+                        //TODO Snackbar 参数view
                         ShareUtils.putString(LoginActivity.this,"username",username);
                         ShareUtils.putString(LoginActivity.this,"password",password);
 
                         Snackbar.make(LoginActivity.this.btn_submit, "登录成功：" + user.getUsername(), Snackbar.LENGTH_LONG).show();
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     } else {
+                        btn_submit.loadingFailed();
                         Snackbar.make(LoginActivity.this.btn_submit, "登录失败：" + e.getMessage(), Snackbar.LENGTH_LONG).show();
                     }
                 }
             });
         } else {
             //TODO 关于字符串资源问题
+            btn_submit.cancelLoading();
             Toast.makeText(this, "用户名或密码不能为空！", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * 绘制跳转动画
+     * @param <fun>
+     * @return null
+     */
+    private <fun> fun toNextPage(){
+        int cx = (btn_submit.getLeft()+btn_submit.getRight())/2;
+        int cy = (btn_submit.getTop()+btn_submit.getBottom())/2;
+
+
+        Animator animator = ViewAnimationUtils.createCircularReveal(animate_view,cx,cy,0f,getResources().getDisplayMetrics().heightPixels * 1.2f);
+        animator.setStartDelay(1000);
+        animator.setDuration(500);
+        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animate_view.setVisibility(View.VISIBLE);
+        animator.start();
+        animator.addListener(new Animator.AnimatorListener(){
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                btn_submit.postDelayed(() -> {
+                    btn_submit.reset();
+                    animate_view.setVisibility(View.INVISIBLE);
+                },200);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                overridePendingTransition(R.anim.anim_in,R.anim.anim_out);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        return null;
     }
 }
