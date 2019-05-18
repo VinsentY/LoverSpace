@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dx.dxloadingbutton.lib.LoadingButton;
 import com.example.vinsent_y.loverspace.R;
 import com.example.vinsent_y.loverspace.entity.MyUser;
+import com.example.vinsent_y.loverspace.util.ShareUtils;
 import com.example.vinsent_y.loverspace.view.NbButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -39,6 +40,9 @@ public class LoginActivity extends AppCompatActivity {
     private Handler handler;
     private Animator animator;
 
+    private String username;
+    private String password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
+        initData();
         initView();
 
         handler = new Handler();
@@ -64,28 +69,35 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void initData() {
+        username = ShareUtils.getString(this,"username","");
+        password = ShareUtils.getString(this,"password", "");
+    }
+
     private void initView() {
-        //TODO 界面编写
         edit_username = findViewById(R.id.edit_username);
         edit_password = findViewById(R.id.edit_password);
         btn_submit = findViewById(R.id.btn_submit);
+
+        edit_username.setText(username);
+        edit_password.setText(password);
     }
 
     /**
      * 检查账号合法性
      */
     public void check() {
-        //TODO 检查账号合法性
-        String username = edit_username.getText().toString().trim();
-        String password = edit_password.getText().toString().trim();
+        username = edit_username.getText().toString().trim();
+        password = edit_password.getText().toString().trim();
 
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
             BmobUser.loginByAccount(username, password, new LogInListener<MyUser>() {
                 @Override
                 public void done(MyUser user, BmobException e) {
                     if (e == null) {
-//                        User user = BmobUser.getCurrentUser(User.class); 获取当前用户实例的方法
-                        //TODO Snackbar 参数view
+                        ShareUtils.putString(LoginActivity.this,"username",username);
+                        ShareUtils.putString(LoginActivity.this,"password",password);
+
                         Snackbar.make(LoginActivity.this.btn_submit, "登录成功：" + user.getUsername(), Snackbar.LENGTH_LONG).show();
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     } else {

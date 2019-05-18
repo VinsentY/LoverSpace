@@ -1,6 +1,8 @@
 package com.example.vinsent_y.loverspace.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vinsent_y.loverspace.R;
+import com.example.vinsent_y.loverspace.entity.Moment;
 
 /**
 * FileName: MainActivity
@@ -15,7 +18,6 @@ import com.example.vinsent_y.loverspace.R;
 * Date: 2019/5/8
 * Description: 主界面
 */
-
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -35,7 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            //TODO 监听器按钮注册
+            case R.id.btn_left_list:
+                startActivity(new Intent(this,ListActivity.class));
+                break;
+            case R.id.btn_right_moment:
+                startActivity(new Intent(this,MomentActivity.class));
+                break;
         }
     }
 }

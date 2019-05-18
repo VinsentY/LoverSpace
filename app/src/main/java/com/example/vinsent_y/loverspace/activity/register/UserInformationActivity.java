@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -115,7 +116,6 @@ public class UserInformationActivity extends AppCompatActivity {
     }
 
     public void check() {
-
         String real_name = edit_real_name.getText().toString();
         String address = spinner_address.getText().toString();
 

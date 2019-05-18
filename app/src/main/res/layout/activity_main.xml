@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
     <com.airbnb.lottie.LottieAnimationView
@@ -23,4 +24,27 @@
         app:lottie_fileName="fab_animate.json"
         app:lottie_loop="true" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/btn_left_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_circle_shape"
+        android:textColor="@android:color/white"
+        android:layout_margin="24dp"
+        android:textAllCaps="false"
+        android:text="List" />
+
+    <Button
+        android:id="@+id/btn_right_moment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/button_circle_shape"
+        android:textColor="@android:color/white"
+        android:layout_margin="24dp"
+        android:textAllCaps="false"
+        android:text="Moment" />
+
+</RelativeLayout>

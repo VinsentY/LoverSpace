@@ -29,6 +29,7 @@
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,15 +38,11 @@
             android:name="cn.bmob.v3.util.BmobContentProvider"
             android:authorities="com.example.vinsent_y.loverspace.BmobContentProvider" />
 
-        <activity android:name=".activity.register.PhoneNumberActivity">
-
-        </activity>
-        <activity 
-            android:name=".activity.register.VerificationActivity">
-
-        </activity>
-        <activity android:name=".activity.register.UserInformationActivity">
-        </activity>
+        <activity android:name=".activity.register.PhoneNumberActivity" />
+        <activity android:name=".activity.register.VerificationActivity" />
+        <activity android:name=".activity.register.UserInformationActivity" />
+        <activity android:name=".activity.ListActivity" />
+        <activity android:name=".activity.MomentActivity"></activity>
     </application>
 
 </manifest>
