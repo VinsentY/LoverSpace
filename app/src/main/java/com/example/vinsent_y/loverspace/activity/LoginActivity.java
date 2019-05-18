@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dx.dxloadingbutton.lib.LoadingButton;
 import com.example.vinsent_y.loverspace.R;
 import com.example.vinsent_y.loverspace.entity.MyUser;
+import com.example.vinsent_y.loverspace.util.L;
 import com.example.vinsent_y.loverspace.util.ShareUtils;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -129,8 +130,7 @@ public class LoginActivity extends AppCompatActivity {
         animator.setStartDelay(1500);
         animator.setDuration(500);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
-        animator.start();
-        animator.addListener(new Animator.AnimatorListener(){
+        animator.addListener(new AnimatorListenerAdapter(){
 
             @Override
             public void onAnimationStart(Animator animation) {
@@ -138,7 +138,8 @@ public class LoginActivity extends AppCompatActivity {
                 btn_submit.postDelayed(() -> {
                     btn_submit.reset();
                     animate_view.setVisibility(View.INVISIBLE);
-                },1500);
+                },1000);
+                L.e("Fuck You!");
             }
 
             @Override
@@ -157,6 +158,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+        animator.start();
         return null;
     }
 }
