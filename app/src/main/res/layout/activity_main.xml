@@ -15,22 +15,51 @@
         android:layout_alignParentRight="true"
         android:layout_margin="8dp"/>
 
-    <!--<com.airbnb.lottie.LottieAnimationView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:lottie_autoPlay="true"-->
-        <!--app:lottie_fileName="fab_animate.json"-->
-        <!--app:lottie_loop="true" />-->
+    <com.github.florent37.shapeofview.ShapeOfView
+        android:id="@+id/vector_heart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:shape_clip_drawable="@drawable/ic_heart">
+
+        <LinearLayout
+            android:layout_width="144dp"
+            android:layout_height="144dp"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/fill_before_view"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:orientation="vertical" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="144dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryLight"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="pink_wave.json"
+                app:lottie_loop="true"
+                app:lottie_speed="2.5" />
+
+            <View
+                android:id="@+id/fill_after_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/colorPrimaryLight"/>
+        </LinearLayout>
+    </com.github.florent37.shapeofview.ShapeOfView>
+
+    <SeekBar
+        android:id="@+id/sb_control_view"
+        android:layout_width="16dp"
+        android:layout_height="144dp"
+        android:max="100"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_toStartOf="@id/vector_heart"/>
 
     <Button
         android:id="@+id/btn_left_schedule"

@@ -1,6 +1,7 @@
 package com.example.vinsent_y.loverspace.activity;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.vinsent_y.loverspace.adapter.ScheduleAdapter;
+//import com.example.vinsent_y.loverspace.adapter.ScheduleAdapter;
 import com.example.vinsent_y.loverspace.R;
 import com.example.vinsent_y.loverspace.entity.Schedule;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class ScheduleActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private ScheduleAdapter mAdapter;
+//    private ScheduleAdapter mAdapter;
     private List<Schedule> list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +27,8 @@ public class ScheduleActivity extends AppCompatActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new ScheduleAdapter(list);
-        mRecyclerView.setAdapter(mAdapter);
+//        mAdapter = new ScheduleAdapter(list);
+//        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void initView() {
