@@ -20,5 +20,6 @@
     <string name="password">密码</string>
     <string name="forget_password">忘记密码</string>
     <string name="register">注册</string>
+    <string name="our_moment">Our Moment</string>
 
 </resources>
