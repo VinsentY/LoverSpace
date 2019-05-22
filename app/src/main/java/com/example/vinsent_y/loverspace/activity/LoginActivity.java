@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
             BmobUser.loginByAccount(username, password, new LogInListener<MyUser>() {
                 @Override
                 public void done(MyUser user, BmobException e) {
+
                     if (e == null) {
 //                        User user = BmobUser.getCurrentUser(User.class); 获取当前用户实例的方法
                         btn_submit.loadingSuccessful();
@@ -105,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         Snackbar.make(LoginActivity.this.btn_submit, "登录成功：" + user.getUsername(), Snackbar.LENGTH_LONG).show();
                     } else {
+                        L.e(e.toString());
                         btn_submit.loadingFailed();
                         Snackbar.make(LoginActivity.this.btn_submit, "登录失败：" + e.getMessage(), Snackbar.LENGTH_LONG).show();
                     }
@@ -139,8 +141,8 @@ public class LoginActivity extends AppCompatActivity {
                 btn_submit.postDelayed(() -> {
                     btn_submit.reset();
                     animate_view.setVisibility(View.INVISIBLE);
-                },1000);
-                L.e("Fuck You!");
+                },1500);
+//                L.e("Fuck You!");
             }
 
             @Override

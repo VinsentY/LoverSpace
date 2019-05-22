@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.vinsent_y.loverspace.R;
-import com.example.vinsent_y.loverspace.util.L;
 
 /**
 * FileName: MainActivity
@@ -22,15 +22,14 @@ import com.example.vinsent_y.loverspace.util.L;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private ImageView img_head;
-    //TODO img_love类型 是SurfaceView吗？
+    private LottieAnimationView wave;
     private Button btn_left_schedule;
     private TextView tv_love_val;
     private Button btn_right_moment;
     private ImageView iv_setting;
     private SeekBar sb_control_view;
-    private View fill_after_view;
-    private View fill_before_view;
+    private View bottom_fill_view;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +37,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         initView();
+        //TODO 动画适配
+
+        wave.scrollTo(0,-110);
         sb_control_view.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 //                L.e(progress +"");
                 runOnUiThread(() -> {
-                    fill_after_view.setMinimumHeight(progress);
-                    fill_before_view.setMinimumHeight(fill_before_view.getHeight()-progress);
-                    L.e(fill_before_view.getHeight() + "");
+                    wave.scrollTo(0,-110 + progress * 2);
+                    bottom_fill_view.setScaleY(1 + progress / 20f);
                 });
 
             }
@@ -67,11 +68,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_left_schedule = findViewById(R.id.btn_left_schedule);
         btn_right_moment = findViewById(R.id.btn_right_moment);
         sb_control_view = findViewById(R.id.sb_control_view);
-        fill_after_view = findViewById(R.id.fill_after_view);
-        fill_before_view = findViewById(R.id.fill_before_view);
+        bottom_fill_view = findViewById(R.id.bottom_fill_view);
         btn_left_schedule.setOnClickListener(this);
         btn_right_moment.setOnClickListener(this);
         iv_setting.setOnClickListener(this);
+        wave = findViewById(R.id.wave);
     }
 
     @Override
