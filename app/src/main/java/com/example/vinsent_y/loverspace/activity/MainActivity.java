@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -30,23 +31,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SeekBar sb_control_view;
     private View bottom_fill_view;
 
-
+    private int offset_px = 0;
+    private float total_px = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initData();
         initView();
-        //TODO 动画适配
 
-        wave.scrollTo(0,-110);
+    }
+
+    private void initData() {
+        offset_px = getResources().getDimensionPixelSize(R.dimen.offset_height);
+        total_px = getResources().getDimensionPixelSize(R.dimen.total_height);
+    }
+
+    private void initView() {
+        iv_setting = findViewById(R.id.iv_setting);
+        btn_left_schedule = findViewById(R.id.btn_left_schedule);
+        btn_right_moment = findViewById(R.id.btn_right_moment);
+        sb_control_view = findViewById(R.id.sb_control_view);
+        bottom_fill_view = findViewById(R.id.bottom_fill_view);
+        btn_left_schedule.setOnClickListener(this);
+        btn_right_moment.setOnClickListener(this);
+        iv_setting.setOnClickListener(this);
+        wave = findViewById(R.id.wave);
+
+        //TODO 动画适配
+        wave.scrollBy(0,-offset_px);
         sb_control_view.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 //                L.e(progress +"");
                 runOnUiThread(() -> {
-                    wave.scrollTo(0,-110 + progress * 2);
-                    bottom_fill_view.setScaleY(1 + progress / 20f);
+                    wave.scrollTo(0,-offset_px + dealPx(progress));
+                    ViewGroup.LayoutParams lp = bottom_fill_view.getLayoutParams();
+                    lp.height = dealPx(progress);
+                    bottom_fill_view.setLayoutParams(lp);
                 });
 
             }
@@ -60,20 +83,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
+
+            private int dealPx(int progress) {
+                return (int) (progress * 1.0 / 100 * total_px);
+            }
         });
     }
 
-    private void initView() {
-        iv_setting = findViewById(R.id.iv_setting);
-        btn_left_schedule = findViewById(R.id.btn_left_schedule);
-        btn_right_moment = findViewById(R.id.btn_right_moment);
-        sb_control_view = findViewById(R.id.sb_control_view);
-        bottom_fill_view = findViewById(R.id.bottom_fill_view);
-        btn_left_schedule.setOnClickListener(this);
-        btn_right_moment.setOnClickListener(this);
-        iv_setting.setOnClickListener(this);
-        wave = findViewById(R.id.wave);
-    }
+
 
     @Override
     public void onClick(View v) {
